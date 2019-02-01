@@ -1,0 +1,55 @@
+##########################################
+#      Migration Automation Script       #
+#             version 1.5.2              #
+#                                        #
+#                   FAQ                  #
+#                                        #
+#         Copyright 2014 Microsoft       #
+#                                        #
+#      http:\\aka.ms\buildingclouds      #
+##########################################
+
+For more information be sure to download the MAT Installation and Usage Guide.
+
+Q: How many VMs should I convert in a batch?
+A: Test your performance to see but generally limit your batches to 20-30 VMs. Since you will want to test the converted machines and deal with the source for each. 
+You should also limit your initial testing to one ESX host. 
+
+Q: What versions of vCenter and ESX is MAT compatible with?
+A: MAT is able to pull data from vCenter/ESX 3.5 Update 2 - 5.1  since it uses PowerCLI 5.1. 
+However the MVMC engine is still limited to vCenter Server or ESXi Server 5.0 and vCenter Server or ESXi/ESX Server 4.1. There are pre-flight checks in the MAT to verify you are using the correct version.
+
+Q: Does the MAT re-create my network cards on the resulting Hyper-V guest?
+A: Yes, up to three nics and their settings can be converted. See the installation guide section on MigrateNICs.
+
+Q: What are the disk space requirements?  
+A: The MVMC engine will export the VM to a local temp folder on the machine responsible for conversion and then it will copy it to the Hyper-V share. 
+If you plan to run multiple VM conversions at once, plan to accommodate for the temp copies as well as the final destination.
+
+Q: Do I have to install MAT in C:\MAT?
+A: No, the MAT can be moved to any folder path that DOES NOT contain spaces as long as you update the PowerShell script variables appropriately. 
+You CANNOT move MAT to a mapped drives since PowerShell does not respect mapped drives. You can use full UNC paths. 
+The location of the MAT files does not have any impact on the output created by MVMC in the user's %temp% path.
+
+Q: What kind of firewall exceptions are needed for the main server to talk to the remote servers?
+A: Open access to and from your SQL server and on any MAT servers open access to/from VMware environment and your Hyper-V host.
+
+Q: Is there any limit to how many 'Helper' servers I can use?
+A: In theory, no, you can add as many helpers as you wish. Take care not to point all the helpers to the same Hyper-V host however. You will saturate the host's network and disk IO. 
+If you have the capacity point each helper to its own Hyper-V host for the best performance. 
+
+Q: Does it matter which version of SQL I use?
+A: No. You can use SQL Express 2012 or any version of SQL Server. 32 or 64-bit versions will work
+
+Q: Occasionally MAT produces false positive messages in status, even though the conversion job terminated incorrectly. Why is this?
+A: We rely on the exit code produced by each instance of MVMC.exe to determine the final state of the conversion. Always check you VM conversion log to verify the results. 
+In future versions we will add logic to throw a mixed message if the final status collected from the log does not match the final exit code from the executable.
+
+Q: I have MAT questions or suggestions for improvement, where can I send them?
+A: MAT specific questions can be mailed to:  mat-questions@microsoft.com. 
+If you are reporting a problem please set the value "$VerboseLogging = 7" and collect new logs. This will produce the most detailed logs possible.
+
+If you need technical support, the MVMC is a supported product. The command line (minus passwords) for the MVMC.exe is logged for each conversion. 
+You can take this command line and issue it outside of the MAT to verify the problem is reproducible with MVMC alone. If so contact support.
+
+

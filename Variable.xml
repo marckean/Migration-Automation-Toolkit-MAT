@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Version 1.5.2  -->
+<!-- MAT for MVMCv1 -->
+<MAT>
+  <General>
+    <Variable Name="XMLVersion" Value="1.5.2" />
+    <Variable Name="Logpath" Value="C:\Users\(username)\AppData\Local\Temp\" /> <!--Logpath - the temp path used by MVMC for the assigned user-->
+    <Variable Name="Datasource" Value="SERVER1"/> <!--SQl Server name for default instance or Server\instance for named instances -->
+    <Variable Name="MigrateNICs" Value="1"/> <!--Enable or disable NIC migration option -->
+    <Variable Name="Showrows " Value="25"/> <!--Total number of rows to display in table during conversion -->
+  </General>
+  <SchedCreds>
+    <Variable Name="WinAccount" Value="contoso\administrator" /> <!--Account with rights to schedule tasks as admin-->
+    <Variable Name="WinPassword" Value="password" /> <!--Password for account with rights to schedule tasks as admin-->
+  </SchedCreds>
+  <HyperV>
+    <Variable Name="tpath" Value="\\SERVER1\Share" /> <!--UNC path to share where MVMC will copy VMs (should be in Target Host) -->
+    <Variable Name="thost" Value="SERVER1" /> <!-- Target Hyper-V Host. FQDN or IP address -->
+    <Variable Name="sPower" Value="0" /> <!-- Final Power Status of Source VM (0 = off) -->
+    <Variable Name="tPower" Value="1" /> <!-- Final Power Status of Target VM (0 = off) -->
+    <Variable Name="DynMac" Value="0" /> <!-- Final MAC Address of Target VM (0 = Keep from VMware) (1 = use Hyper-V Dynamic) -->
+    <Variable Name="dynamicdisk" Value="1" /> <!-- Dynamic or fixed disk (0 = fixed) -->
+  </HyperV>
+  <VMware>
+    <Variable Name="shost" Value="10.10.10.1" /> <!--Source Host (ESX or vSphere) FQDN or IP address -->
+    <Variable Name="shusername" Value="contoso\administrator" /> <!--Source Host Admin account  -->
+    <Variable Name="shpwd" Value="password" /> <!--Password for Source Host Admin account  -->
+    <Variable Name="gUser" Value="contoso\administrator" /> <!--Guest VM Admin Account (domain or local account) -->
+    <Variable Name="gPwd" Value="password" /> <!--Password for Guest VM Admin Account (domain or local account) -->
+  </VMware>
+  <RemoteHost>
+	<!--  <ConvertServer>SERVER2</ConvertServer>  Remote Servers that help with conversion. (Add as needed) -->
+  </RemoteHost>
+</MAT>
